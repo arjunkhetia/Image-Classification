@@ -54,7 +54,11 @@ console.log('Predictions: ');
 console.log(predictions);
 ```
 
+# Image Mode - 
+
 ![Image Mode](https://github.com/arjunkhetia/Image-Classification/blob/master/src/assets/imagemode.png "Image Mode")
+
+# Video Mode - 
 
 ![Video Mode](https://github.com/arjunkhetia/Image-Classification/blob/master/src/assets/videomode.png "Video Mode")
 
