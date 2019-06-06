@@ -1,0 +1,73 @@
+<router-outlet></router-outlet>
+<div class="container">
+  <div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+      <h1 class="display-4">{{ title }}</h1>
+      <p class="lead">{{ introline }}</p>
+    </div>
+  </div>
+  <div *ngIf="!modelLoaded" class="row">
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar">
+        <b class="progress-text">Loading Model...</b>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="modelLoaded" class="row">
+    <div class="col text-center mb-3">
+      <button type="button" class="btn btn-lg btn-block" [ngClass]="imgBtnStatus ? 'btn-primary' : 'btn-secondary'" (click)="imageMode();">
+        <i class="fa fa-picture-o" aria-hidden="true"></i> &nbsp; Image
+      </button>
+    </div>
+    <div class="col text-center mb-3">
+      <button type="button" class="btn btn-lg btn-block" [ngClass]="webBtnStatus ? 'btn-primary' : 'btn-secondary'" (click)="videoMode()">
+        <i class="fa fa-camera" aria-hidden="true"></i> &nbsp; Webcam
+      </button>
+    </div>
+  </div>
+  <div [hidden]="!modelLoaded || !webBtnStatus" class="row">
+    <div class="col mb-3 text-center">
+      <button type="button" class="btn btn-warning" (click)="snapPhoto()"> Snap Photo </button>
+    </div>
+  </div>
+  <div class="row">
+    <div [hidden]="!modelLoaded || !webBtnStatus" class="col mb-3">
+      <video #videoElement width="{{ videoWidth }}" height="{{ videoHeight }}"></video>
+    </div>
+    <div *ngIf="modelLoaded" class="col mb-3 text-center">
+      <img id="image" class="img-responsive img-border" [src]="imageSrc" alt="No Image" (load)="predict();" width="{{ imageWidth }}" height="{{ imageHeight }}" crossorigin="anonymous">
+    </div>
+    <div [hidden]="true" class="col mb-3">
+      <canvas #videoCanvas id="videoCanvas" width="{{ videoCanvasWidth }}" height="{{ videoCanvasHeight }}"></canvas>
+    </div>
+    <div class="col mb-3">
+      <div class="text-center prediction-text">
+        <h4>Predictions : </h4>
+      </div>
+      <div class="row" *ngFor="let predict of prediction, let i = index;">
+        <div class="col text-left mb-3">
+          <h5>{{ i+1 }}) &nbsp; {{ predict['className'] }}</h5>
+        </div>
+        <div class="col text-right mb-3">
+          <h5>{{ (predict['probability'] * 100).toFixed(2) }} %</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="modelLoaded && imgBtnStatus" class="row">
+    <div class="col upload-box">
+      <div class="hold">
+        <span *ngIf="!fileError" class="file-text">{{ fileName }}</span>
+        <span *ngIf="fileError" class="file-text">
+          <i class="alert alert-danger" role="alert">
+            Only images are supported.
+          </i>
+        </span>
+        <span class="btn-file">
+          <i class="fa fa-folder-open" aria-hidden="true"></i> Browse File
+          <input #file type="file" (change)="browseFile(file.files)">
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
