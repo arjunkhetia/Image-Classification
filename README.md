@@ -27,7 +27,7 @@ $ npm start
 
 ## TensorFlow.js
 
-[TensorFlow] (https://www.tensorflow.org) is an open source software library for numerical computation using data flow graphs. The graph nodes represent mathematical operations, while the graph edges represent the multidimensional data arrays (tensors) that flow between them. [TensorFlow.js] (https://www.tensorflow.org/js) is a library for developing and training ML models in JavaScript, and deploying in browser or on Node.js.
+[TensorFlow](https://www.tensorflow.org) is an open source software library for numerical computation using data flow graphs. The graph nodes represent mathematical operations, while the graph edges represent the multidimensional data arrays (tensors) that flow between them. [TensorFlow.js](https://www.tensorflow.org/js) is a library for developing and training ML models in JavaScript, and deploying in browser or on Node.js.
 
 ```ts
 import * as tfjs from '@tensorflow/tfjs';
