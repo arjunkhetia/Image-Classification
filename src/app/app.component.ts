@@ -34,7 +34,6 @@ export class AppComponent implements OnInit{
   public async ngOnInit() {
     this.model = await mobilenet.load();
     this.modelLoaded = true;
-    console.log('Model Loaded...!');
   }
 
   public imageMode() {
@@ -97,7 +96,6 @@ export class AppComponent implements OnInit{
       if (this.imageSrc !== 'assets/white.jpg') {
         this.imageElement = document.getElementById('image');
         this.prediction = await this.model.classify(this.imageElement);
-        console.log(this.prediction);
       }
     }
   }
